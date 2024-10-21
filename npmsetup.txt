@@ -1,0 +1,7 @@
+npm i express express-mongo-sanitize express-rate-limit xss hpp  cors helmet express-validator compression mongoose jsonwebtoken bcrypt dotenv multer nodemailer axios validator
+
+npm i morgan nodemon esm esm-wallaby cross-env
+
+
+
+
