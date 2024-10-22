@@ -1,15 +1,17 @@
-import cluster from "cluster";
+import cluster, { Worker } from "cluster";
+import { Express } from "express";
 import { config, connectDB } from "./config";
 import { runCron, cronCount } from "./cron";
 import { globalErrorHandler, notFoundHandler } from "./error";
 import { setupRoutes } from "./routes";
 
-export const setupServerCluster = (app) => {
+export const setupServerCluster = (app: Express): void => {
   console.log(`Primary ${process.pid} is running`, process.env.NODE_ENV);
 
   // SET UP CLUSTERS
   if (cluster.isPrimary) {
     console.log(`Primary ${process.pid} is running`);
+
     // CONNECT DB
     (async function () {
       await connectDB();
@@ -29,18 +31,24 @@ export const setupServerCluster = (app) => {
 
     // CREATE CRON FORK
     if (cronCount > 0) {
+      // Pass WORKER_ROLE in the environment of the forked worker
       cluster.fork({ WORKER_ROLE: "cron" });
     }
 
-    // Optional: Monitor worker exits and restart them if necessary
-    cluster.on("exit", (worker, code, signal) => {
+    // Monitor worker exits and restart them if necessary
+    cluster.on("exit", (worker: Worker, code: number, signal: string) => {
       console.log(`Worker ${worker.process.pid} died. Restarting...`);
-      cluster.fork(worker.process.env); // Restart the worker with the same role
+
+      // Instead of accessing worker.process.env, use a more reliable condition
+      // You already know this worker was forked for cron, so restart it with WORKER_ROLE = "cron"
+      cluster.fork({ WORKER_ROLE: "cron" });
     });
   } else {
+    // Handle cron worker tasks if WORKER_ROLE is 'cron'
     if (process.env.WORKER_ROLE === "cron") {
       if (process.env.NODE_ENV === "production") {
         console.log("CRON CLUSTER RUNNING");
+
         // CONNECT DB
         (async function () {
           await connectDB();

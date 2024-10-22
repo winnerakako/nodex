@@ -2,6 +2,14 @@ npm i express express-mongo-sanitize express-rate-limit xss hpp  cors helmet exp
 
 npm i morgan nodemon esm esm-wallaby cross-env
 
+// Typescript
+npm install -D typescript @types/node @types/express @types/jsonwebtoken @types/nodemailer ts-node --save-dev
 
+
+npm i --save-dev @types/nodemailer-mailgun-transport
+npm i --save-dev @types/nodemailer-sendgrid
+npm install --save-dev @types/bcrypt
+npm install --save-dev @types/express @types/helmet @types/cors @types/express-rate-limit @types/hpp @types/compression @types/morgan
+npm i --save-dev @types/validator
 
 

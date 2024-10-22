@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "./dist", // Output directory for compiled files
+        "rootDir": "./", // Root directory for source files
+        "resolveJsonModule": true // Add this if you import any JSON files
+    },
+    "include": [
+        "./**/*.ts" // Include all TypeScript files in any directory
+    ],
+    "exclude": [
+        "node_modules", // Exclude node_modules
+        "dist", // Exclude the output directory
+        "*.test.ts", // Optionally exclude test files
+        "*.spec.ts"
+    ]
+}
