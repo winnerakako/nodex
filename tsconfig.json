@@ -7,11 +7,11 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "outDir": "./dist", // Output directory for compiled files
-        "rootDir": "./", // Root directory for source files
+        "rootDir": "./", // Root directory is the parent directory
         "resolveJsonModule": true // Add this if you import any JSON files
     },
     "include": [
-        "./**/*.ts" // Include all TypeScript files in any directory
+        "./*.ts" // Include all TypeScript files in the parent directory
     ],
     "exclude": [
         "node_modules", // Exclude node_modules

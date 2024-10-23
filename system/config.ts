@@ -46,7 +46,7 @@ export const connectDB = async (
     isConnected = true;
     console.log("**DB CONNECTED**");
     return isConnected;
-  } catch (err) {
+  } catch (err: any) {
     console.log("DB CONNECTION ERR:", err.message);
 
     // Check for specific error messages
